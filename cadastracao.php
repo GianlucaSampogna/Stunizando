@@ -49,7 +49,7 @@ if (mysqli_query($conexao, $sql)) {
             $_SESSION['genero'] = $usuario['genero'];
             $_SESSION['password'] = $usuario['password'];
 
-            header("Location: materias.php");
+            header("Location: meu_plano_estudo.php");
 } else {
    echo "Erro: " . mysqli_error($conexao);
 }
