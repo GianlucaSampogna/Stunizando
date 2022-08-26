@@ -86,5 +86,4 @@ include_once 'header.php'; ///Incluição do header
 
 		<?php
 		include_once 'footer.php'; /// incluição do arquivo com o footer
-		include_once 'final.php';
 		?>

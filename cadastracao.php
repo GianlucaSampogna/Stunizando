@@ -15,7 +15,6 @@ $senha = $_POST['password'];
 $emailvalidate = filter_var($email,FILTER_VALIDATE_EMAIL);
 
 
-echo $nome;
 
 //pega a senha no cadastro, |criptografa| e transforma em uma variável
 $senha = password_hash($senha, PASSWORD_DEFAULT);
@@ -49,7 +48,7 @@ if (mysqli_query($conexao, $sql)) {
             $_SESSION['genero'] = $usuario['genero'];
             $_SESSION['password'] = $usuario['password'];
 
-            header("Location: meu_plano_estudo.php");
+            header("Location: materias.php");
 } else {
    echo "Erro: " . mysqli_error($conexao);
 }

@@ -1,4 +1,3 @@
-<!-- foi criado porque nem todas as páginas (CADASTRO) tem o footer incluso (portanto não dária para adicionar isso em todas as páginas) -->
 <!-- JavaScript (Opcional) -->
 <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

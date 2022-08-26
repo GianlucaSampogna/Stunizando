@@ -32,5 +32,4 @@ $id = $_SESSION['id'];
 
 <?php 
 include_once "footer_cadastrado.php";
-include_once 'final.php';
 ?>
