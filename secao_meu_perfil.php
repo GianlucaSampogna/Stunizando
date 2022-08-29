@@ -23,13 +23,18 @@ $id = $_SESSION['id'];
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Email:  <?php echo $dados['email']; ?></li>
                 <li class="list-group-item">Número: <?php echo $dados['celular']; ?></li>
-                <li class="list-group-item">Gênero: <?php echo $dados['genero'] ?></li>
+                <li class="list-group-item">Gênero: <?php echo $dados['genero']; ?></li>
             </ul>
     </div>
 </div>
 
 
+<a href="secao_atualizar.php">
+    <button type="button" class="btn btn-primary btn-lg" >Desejo atualizar minhas informaçoes</button>
+</a>
+
 
 <?php 
 include_once "footer_cadastrado.php";
+include_once 'final.php';
 ?>

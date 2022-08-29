@@ -154,4 +154,9 @@ h2 {font-size: 125%;}
 .h { background-color: #2D649C; color:white; }
 hr {width: 600px; background-color: #cccccc; border: 0px; height: 1px; color: #000000;}
 
+.checkboxcaixa{
+	display: flex;
+	flex-direction: row;
+}
+
 			

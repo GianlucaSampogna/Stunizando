@@ -78,7 +78,5 @@ $nome_da_pagina = 'matérias';
 
 <?php
 require_once 'footer_cadastrado.php';
+include_once 'final.php';
 ?>
-
-    </body>
-</html>
