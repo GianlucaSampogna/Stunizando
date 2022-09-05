@@ -60,25 +60,8 @@ if ($dados['nome'] == "") {
 
                 </div>
             </div>
-            <?php
-            if (isset($_POST['btn-edit'])) :
-                $nome = mysqli_escape_string($conexao, $_POST['nome']);
-                $sobrenome = mysqli_escape_string($conexao, $_POST['sobrenome']);
-                $email = mysqli_escape_string($conexao, $_POST['email']);
-                $celular = mysqli_escape_string($conexao, $_POST['celular']);
 
-                $sql = "UPDATE usuario SET nome='$nome', sobrenome='$sobrenome', email='$email', celular='$celular' WHERE  id=$id";
-
-
-
-                if (mysqli_query($conexao, $sql)) {
-                    header ("Refresh: 0; url=http://localhost/secao_atualizar.php");
-                } else {
-                    echo $sql;
-                    die(mysqli_connect_error());
-                }
-            endif;
-
+        </form>
 
             if (isset($_POST['btn-deletar'])) :
                 $id = mysqli_escape_string($conexao, $_POST['id']);
@@ -103,3 +86,27 @@ if ($dados['nome'] == "") {
                 M.AutoInit();
             </script>
             <?include_once 'final.php';?>
+
+
+
+
+
+
+
+            <!-- Modal Structure deletar -->
+				  <div id="modal<?php echo $dados['id'];?>" class="modal">
+					<div class="modal-content">
+					  <h3>Atenção!</h3>
+					  <p>Deseja excluir esse cliente?</p>
+					</div>
+					<div class="modal-footer">
+					  
+					  <form action="28crud_delete.php" method="POST">
+						<input type="hidden" name="id" value="<?php echo $dados['id'];?>">
+						<button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
+						<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+					  
+					  </form>
+					  
+					</div>
+				  </div>
