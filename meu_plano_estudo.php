@@ -1,11 +1,11 @@
 <?php 
-include_once 'head.php';
+include_once 'head2.php';
 include_once 'header_cadastrado.php';
 include_once 'protect.php';
 ?>
 <form  action="cadastracao_meuplanejamento.php" method="post">
 
-<div class="container" >
+<div class="container plano">
     <div class="row">
         <div class="col-sm-8 ">
             
@@ -56,21 +56,22 @@ include_once 'protect.php';
         </div>
         <div class="col-sm-2">
             <legend>Horas de estudo a cada dia: </legend>
-                <input type="number" name="hrs_seg" class="form-control" value="0" >
-                <input type="number" name="hrs_ter" class="form-control"  value="0">
-                <input type="number" name="hrs_qua" class="form-control"   value="0">
-                <input type="number" name="hrs_qui" class="form-control"   value="0">
-                <input type="number" name="hrs_sex" class="form-control"   value="0">
-                <input type="number" name="hrs_sab" class="form-control"  value="0">
-                <input type="number" name="hrs_dom" class="form-control"  value="0">
+                <input type="number" name="hrs_seg" class="form-control" placeholder="Segunda" required>
+                <input type="number" name="hrs_ter" class="form-control"  placeholder="Terça" required>
+                <input type="number" name="hrs_qua" class="form-control"   placeholder="Quarta" required>
+                <input type="number" name="hrs_qui" class="form-control"   placeholder="Quinta" required>
+                <input type="number" name="hrs_sex" class="form-control"   placeholder="Sexta" required>
+                <input type="number" name="hrs_sab" class="form-control"  placeholder="Sabado" required>
+                <input type="number" name="hrs_dom" class="form-control"  placeholder="Domingo" required>
 
         </div>
     </div>
 </div>
 
-<div aling="center">
-    <div class="col-sm-8" >
-        <button name="botao_plano_estudo" class="btn btn-primary" type="submit">Enviar</button>
+<div class="btn_send ">
+    <div class="col-sm-8 d-grid gap-2" >
+        <button name="botao_plano_estudo" class="btnplano btn btn-primary" type="submit">Enviar</button>
+        
     </div>
 
 </div>
@@ -79,6 +80,6 @@ include_once 'protect.php';
 </form>
 
 <?php
-require_once 'footer_cadastrado.php';
+
 include_once 'final.php';
 ?>

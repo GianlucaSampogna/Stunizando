@@ -68,10 +68,6 @@ include_once 'head.php';
                             <label for="male">Masculino</label>
                         </div>
 
-                        <div class="gender-input"><!--genero do atributo-->
-                            <input id="others" type="radio" value="P" name="genero">
-                            <label for="others">Prefiro não dizer</label>
-                        </div>
 
                     </div>
                 </div>

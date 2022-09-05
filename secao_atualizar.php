@@ -17,9 +17,9 @@ if ($dados['nome'] == "") {
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <div class="row">
-    <div class="col s12 m6 push-m3 ">
+    <div class="col s12 m6 ">
         <h3 class="light"> Editar Cliente </h3>
-        <form action="" method="POST">
+        <form action="crud-editar.php" method="POST">
             <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
             <div class="input-field col s12">
                 <input type="text" name="nome" id="nome" value="<?php echo $dados['nome']; ?>">
@@ -42,7 +42,7 @@ if ($dados['nome'] == "") {
             </div>
 
             <button type="submit" name="btn-edit" class="btn">Atualizar</button>
-            <a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a>
+            <a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons"><ion-icon name="trash-outline"></ion-icon></i></a>
 
             <!-- Modal Structure deletar -->
             <div id="modal<?php echo $dados['id']; ?>" class="modal">
@@ -55,53 +55,19 @@ if ($dados['nome'] == "") {
                     <form action="" method="POST">
                         <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
                         <button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                        <a href="#modal" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
                     </form>
 
                 </div>
             </div>
-
-        </form>
-
-            if (isset($_POST['btn-deletar'])) :
-                $id = mysqli_escape_string($conexao, $_POST['id']);
-
-                $sql = "DELETE FROM usuario WHERE  id=$id";
-
-                if (mysqli_query($conexao, $sql)) {
-                    include_once 'logout.php';
-                } else {
-                    echo $sql;
-                }
-            endif;
-            ?>
-
-            <!-- INCLUIR O NOSSO FOOTER!!!!!!!!!!! -->
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-            <script>
-                M.AutoInit();
-            </script>
-            <?include_once 'final.php';?>
-
-
-
-
-
-
-
-            <!-- Modal Structure deletar -->
-				  <div id="modal<?php echo $dados['id'];?>" class="modal">
+<div id="modal<?php echo $dados['id'];?>" class="modal">
 					<div class="modal-content">
 					  <h3>Atenção!</h3>
 					  <p>Deseja excluir esse cliente?</p>
 					</div>
 					<div class="modal-footer">
 					  
-					  <form action="28crud_delete.php" method="POST">
+					  <form action="crud_deletar.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $dados['id'];?>">
 						<button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
 						<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
@@ -110,3 +76,27 @@ if ($dados['nome'] == "") {
 					  
 					</div>
 				  </div>
+        </form>
+
+
+        
+
+
+            <!-- INCLUIR O NOSSO FOOTER!!!!!!!!!!! -->
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+            <script>
+                M.AutoInit();
+            </script>
+            
+            <?include_once 'final.php';?>
+
+
+
+
+
+

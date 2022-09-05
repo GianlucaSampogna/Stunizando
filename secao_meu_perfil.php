@@ -16,25 +16,43 @@ $id = $_SESSION['id'];
     
 ?>
 
-<div class="alinhamento_centro margem_emcima">
-    <h1><?php echo $dados['nome'];?> <?php echo $dados['sobrenome']; ?></h1>  </br></br>
-    <h3>SUAS INFORMAÇOES</h3>
-        <div class="card col-sm-6 offset-sm-4"  style="width: 30rem;">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Email:  <?php echo $dados['email']; ?></li>
-                <li class="list-group-item">Número: <?php echo $dados['celular']; ?></li>
-                <li class="list-group-item">Gênero: <?php echo $dados['genero']; ?></li>
-            </ul>
+<div class=" margem_emcima">
+
+    
+    <div class="d-flex justify-content-center flex-wrap w-100"  style="width: 30rem;">
+        <h3 class="d-block w-100 text-center">SUAS INFORMAÇOES</h3>
+        <div class="mb-3  ml-5 w-50 d-block">
+            <label for="exampleInputEmail1" class="form-label">Nome:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['nome']; ?>">
+        </div>
+        <div class="mb-3 ml-5 w-50 d-block">
+            <label for="exampleInputEmail1" class="form-label">Sobrenome:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['sobrenome']; ?>">
+        </div>
+        <div class="mb-3 ml-5 w-50 d-block">
+            <label for="exampleInputEmail1" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['email']; ?>">
+        </div>
+        <div class="mb-3 ml-5 w-50 d-block">
+            <label for="exampleInputEmail1" class="form-label">Celular:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['celular']; ?>">
+        </div>
+        <div class="mb-3 ml-5 w-50 d-block">
+            <label for="exampleInputEmail1" class="form-label">Genero:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['genero']; ?>">
+        </div>
     </div>
 </div>
 
+<div class="d-flex justify-content-center">
+    <a href="secao_atualizar.php">
+        <button type="button" class="btn btn-primary btn-lg" >Desejo atualizar minhas informaçoes</button>
+    </a>
+</div>
 
-<a href="secao_atualizar.php">
-    <button type="button" class="btn btn-primary btn-lg" >Desejo atualizar minhas informaçoes</button>
-</a>
 
 
 <?php 
-include_once "footer_cadastrado.php";
+
 include_once 'final.php';
 ?>
