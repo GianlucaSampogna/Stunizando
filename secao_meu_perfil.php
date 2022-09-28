@@ -5,13 +5,10 @@ include_once 'header_cadastrado.php'; ///Incluição do header
 session_start();
 $id = $_SESSION['id'];
     $sql = "SELECT * FROM usuario WHERE id = $id";
-    $resultado = mysqli_query($conexao, $sql);
-    $dados = mysqli_fetch_array($resultado); 
+    $result = pg_query($conexao, $sql);
+    $dados = pg_fetch_array($result); 
 
 
-    if($dados['nome'] == ""){
-    $dados['nome'] = 'Pagina';
-    }
 
     
 ?>
@@ -39,7 +36,7 @@ $id = $_SESSION['id'];
         </div>
         <div class="mb-3 ml-5 w-50 d-block">
             <label for="exampleInputEmail1" class="form-label">Genero:</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['genero']; ?>">
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['sexo']; ?>">
         </div>
     </div>
 </div>

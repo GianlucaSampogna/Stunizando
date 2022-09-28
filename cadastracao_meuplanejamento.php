@@ -51,6 +51,8 @@ if (isset($_POST["biologia"])) {
 
 //pega os dados no cadastro e os transforma em variáveis
 
+$id_usuario = $_POST['id_usuario'];
+$nome_planejamento = $_POST['nome_planejamento'];
 $inicia_data = $_POST['dt_inicio_estudos'];
 $data_prova = $_POST['dt_fim_estudos'];
 $hrs_seg = $_POST['hrs_seg'];
@@ -61,20 +63,25 @@ $hrs_sex = $_POST['hrs_sex'];
 $hrs_sab = $_POST['hrs_sab'];
 $hrs_dom = $_POST['hrs_dom'];
 
-
+echo $id_usuario;
 
 
 
 
 //insere os dados na tabela do banco dee dados
-$sql = "INSERT INTO meu_plano_estudo(inicio_data,data_prova,portugues,matematica,geografia,historia,quimica,fisica,biologia,hrs_seg,hrs_ter,hrs_qua,hrs_qui,hrs_sex,hrs_sab,hrs_dom) 
-         VALUES('$inicia_data','$data_prova','$portugues','$matematica','$geografia','$historia','$quimica','$fisica','$biologia','$hrs_seg','$hrs_ter','$hrs_qua','$hrs_qui','$hrs_sex','$hrs_sab','$hrs_dom')";
+$sql = "INSERT INTO planejamento(nome, dt_inicio,dt_final, fk_usuario_id) 
+         VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario) RETURNING ID";
+$result = pg_query($conexao, $sql);
+$ultimoID = pg_fetch_array($result,0)[0];
 
-if (mysqli_query($conexao, $sql)){
-    header("location:materias.php");
+
+
+
+if (pg_query($conexao, $sql)){  
+    header("Location: materias.php");
 }
 
-mysqli_close($conexao);
+pg_close($conexao);
 ?>
 
 

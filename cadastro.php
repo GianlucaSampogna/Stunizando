@@ -73,7 +73,7 @@ include_once 'head.php';
                 </div>
 
                 <div class="continue-button">
-                    <button class="botao" type="submit">Enviar</button>
+                    <button class="botao" name="botao_login" type="submit">Enviar</button>
                     <br><br><br><p>Caso já tenha conta, faça o <a href="login.php">Login</a> </p>
                 </div>
             </form>

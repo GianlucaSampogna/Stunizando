@@ -15,30 +15,23 @@ if (isset($_POST['email']) || isset($_POST['password'])) {
    } else {
 
       $sql_code = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
-      $sql_query = $conexao->query($sql_code) or die($conexao->error);
+      $result = pg_query($conexao, $sql_code);
+      $num_rows = pg_num_rows($result);
 
-      $quantidade = $sql_query->num_rows;
+      
 
-      if ($quantidade == 1) {
+      if($num_rows > 0){
 
-         $usuario = $sql_query->fetch_assoc();
-         if (password_verify($senha, $usuario['senha'])) {
-
-            if (!isset($_SESSION)) {
-               session_start();
-            }
-
+        $usuario = pg_fetch_array($result);
+        if (password_verify($senha, $usuario['senha'])) {
+            session_start();
             $_SESSION['id'] = $usuario['id'];
-
             header("Location: materias.php");
-         } else {
-            echo "Falha ao logar! E-mail ou senha incorretos";
-         }
-      } else {
-         echo "Falha ao logar! E-mail ou senha incorretos";
+            }
       }
-   }
-}
+      }
+      }
+
 
 include_once 'head.php';
 ?>

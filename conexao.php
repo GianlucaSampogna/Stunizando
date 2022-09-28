@@ -1,15 +1,12 @@
 <?php
-$host = 'localhost';
-$usuario = 'root';
-$senha ='usbw';
-$dtbase = 'gdh';
+$host = 'kesavan.db.elephantsql.com';
+$port = '5432';
+$dbname ='msrybghu';
+$user = 'msrybghu';
+$password = 'QBDUr6ByJoKwhyRG4PiXqZH_hqveARmp';
 
+$connection_string = "host={$host} port={$port} dbname={$dbname} user={$user} password={$password} ";
+$conexao = pg_connect($connection_string);
 
-$conexao = mysqli_connect($host, $usuario, $senha, $dtbase);
-
-
-if (!$conexao){
-    die(mysqli_connect_error());
-    echo 'Erro';
-}
+?>
 

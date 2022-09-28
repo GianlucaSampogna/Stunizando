@@ -1,13 +1,13 @@
-<?
+<?php
 
 include_once 'conexao.php';
 
             if (isset($_POST['btn-deletar'])) :
-                $id = mysqli_escape_string($conexao, $_POST['id']);
+                $id = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
 
                 $sql = "DELETE FROM usuario WHERE  id=$id";
 
-                if (mysqli_query($conexao, $sql)) {
+                if (pg_query($conexao, $sql)) {
                     include_once 'logout.php';
                 } else {
                     echo $sql;

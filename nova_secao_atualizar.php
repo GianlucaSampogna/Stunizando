@@ -1,4 +1,4 @@
-<?php
+<?
 include_once 'head.php';
 include_once 'header_cadastrado.php';
 include_once 'protect.php';
@@ -8,10 +8,17 @@ $sql = "SELECT * FROM usuario WHERE id = $id";
 $result = pg_query($conexao, $sql);
 $dados = pg_fetch_array($result);
 
+if(pg_num_rows($result) > 0){
+    echo "SADFWFE";
+}else{
+    echo "NAO TEM NADA";
+}
+
+
 
 
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
 <div class="row">
     <div class="col s12 m6 ">
         <h3 class="light"> Editar Cliente </h3>
@@ -20,6 +27,11 @@ $dados = pg_fetch_array($result);
             <div class="input-field col s12">
                 <input type="text" name="nome" id="nome" value="<?php echo $dados['nome']; ?>">
                 <label for="nome"> Nome</label>
+                if(pg_num_rows($result) > 0){
+    echo "SADFWFE";
+}else{
+    echo "NAO TEM NADA";
+}
             </div>
 
             <div class="input-field col s12">

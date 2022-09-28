@@ -9,9 +9,14 @@ include_once 'protect.php';
     <div class="row">
         <div class="col-sm-8 ">
             
+        <legend>Nome do planejamento: </legend>
+                <input type="text" name="nome_planejamento" class="form-control" placeholder="Exemplo: Planejamento ufes" id="data_inicio_estudos" >
+            </br>
+
                 <legend>Inicio dos estudos: </legend>
                 <input type="date" name="dt_inicio_estudos" class="form-control" placeholder="Leave a comment here" id="data_inicio_estudos" value="dt_inicio_estudo">
             </br>
+
                 <legend>Dia da prova: </legend>
                 <input type="date" name="dt_fim_estudos" class="form-control" placeholder="Leave a comment here" id="dt_fim_estudos" value="dt_prova">
             </br></br></br>
@@ -67,6 +72,8 @@ include_once 'protect.php';
         </div>
     </div>
 </div>
+
+<input type="hidden" name="id_usuario" value="<?=$_SESSION['id'] ?>"
 
 <div class="btn_send ">
     <div class="col-sm-8 d-grid gap-2" >

@@ -15,44 +15,27 @@ $senha = $_POST['password'];
 $emailvalidate = filter_var($email,FILTER_VALIDATE_EMAIL);
 
 
-echo $nome;
 
 //pega a senha no cadastro, |criptografa| e transforma em uma variável
 $senha = password_hash($senha, PASSWORD_DEFAULT);
 
 //insere os dados na tabela do banco dee dados
-$sql = "INSERT INTO usuario(nome,sobrenome,email,celular,genero,senha) 
-         VALUES('$nome','$sobrenome','$emailvalidate','$celular','$genero','$senha')";
-mysqli_error($conexao);
-//faz o login automático
-if (mysqli_query($conexao, $sql)) {
-   $sql_code = "SELECT * FROM usuario WHERE email = '$email' LIMIT 1";
-      $sql_query = $conexao->query($sql_code) or die($conexao->error);
+$sql = "INSERT INTO usuario(nome,sobrenome,email,celular,sexo,senha) 
+         VALUES('$nome','$sobrenome','$emailvalidate','$celular','$genero','$senha')";    
 
-      $quantidade = $sql_query->num_rows;
+   $data = pg_query($conexao, $sql);
+   
 
-      if ($quantidade == 1) {
 
-         $usuario = $sql_query->fetch_assoc();
-         //if (password_verify($senha, $usuario['password'])) {
-         if ($senha==$senha) {
+   $login_check = pg_num_rows($data);
 
-            if (!isset($_SESSION)) {
-               session_start();
-            }
 
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome'];
-            $_SESSION['sobrenome'] = $usuario['sobrenome'];
-            $_SESSION['email'] = $usuario['email'];
-            $_SESSION['celular'] = $usuario['celular'];
-            $_SESSION['genero'] = $usuario['genero'];
-            $_SESSION['password'] = $usuario['password'];
+   /* TÁ DANDO UM ERRO NA LINHA 37, QUE NÃO ESTÁ DIFERENCIANDO SE A PESSOA SE CADASTROU OU NÃO, POREM ESTÁ FORMANDO O CÓDIGO SQL NO BANCO DE DADOS */
+   if($login_check>0){
+      header("Location: login.php");
+      }else{
+         header("Location: cadastro.php");
+         echo 'Alguma informação está incorreta, tente novamente';
 
-            header("Location: meu_plano_estudo.php");
-} else {
-   echo "Erro: " . mysqli_error($conexao);
-}
-      }}
-mysqli_close($conexao);
-?>
+      }
+
