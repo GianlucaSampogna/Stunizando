@@ -72,8 +72,23 @@ echo $id_usuario;
 $sql = "INSERT INTO planejamento(nome, dt_inicio,dt_final, fk_usuario_id) 
          VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario) RETURNING ID";
 $result = pg_query($conexao, $sql);
+
+
 $ultimoID = pg_fetch_array($result,0)[0];
 
+$i = 0;
+$num = 1;
+for ($i = 1; i <=6; $i++){
+    $sql = "INSERT INTO plan_dia WHERE fk(fk_dia_semana_id, qtd_hrs) 
+    VALUES('$num', '$hrs_seg') ";
+    $result = pg_query($conexao, $sql);
+    $num = $num + 1
+}
+
+$sql_seg = "INSERT INTO plan_dia(fk_dia_semana_id, qtd_hrs) 
+VALUES('1', '$hrs_seg',)";
+
+$sql_ter = 
 
 
 
