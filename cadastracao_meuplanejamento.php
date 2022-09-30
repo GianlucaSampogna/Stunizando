@@ -81,9 +81,9 @@ $num = 1;
 $info = array($hrs_dom, $hrs_sab, $hrs_sex, $hrs_qui, $hrs_qua, $hrs_ter, $hrs_seg);
 list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info; 
 
-for ($i = 1; $i <=6; $i++){
-    $sql = "INSERT INTO plan_dia (fk_dia_semana_id, qtd_hrs) 
-    VALUES('$num', '$info[$i]') ";
+for ($i = 0; $i <=6; $i++){
+    $sql = "INSERT INTO plan_dia (fk_planejamento_id, fk_dia_semana_id, qtd_horas) 
+    VALUES('$ultimoID','$num', '$info[$i]') ";
     $result = pg_query($conexao, $sql);
     $num = $num + 1;
 }
