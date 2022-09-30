@@ -63,7 +63,7 @@ $hrs_sex = $_POST['hrs_sex'];
 $hrs_sab = $_POST['hrs_sab'];
 $hrs_dom = $_POST['hrs_dom'];
 
-echo $id_usuario;
+
 
 
 
@@ -78,17 +78,17 @@ $ultimoID = pg_fetch_array($result,0)[0];
 
 $i = 0;
 $num = 1;
-for ($i = 1; i <=6; $i++){
-    $sql = "INSERT INTO plan_dia WHERE fk(fk_dia_semana_id, qtd_hrs) 
-    VALUES('$num', '$hrs_seg') ";
+$info = array($hrs_dom, $hrs_sab, $hrs_sex, $hrs_qui, $hrs_qua, $hrs_ter, $hrs_seg);
+list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info; 
+
+for ($i = 1; $i <=6; $i++){
+    $sql = "INSERT INTO plan_dia (fk_dia_semana_id, qtd_hrs) 
+    VALUES('$num', '$info[$i]') ";
     $result = pg_query($conexao, $sql);
-    $num = $num + 1
+    $num = $num + 1;
 }
 
-$sql_seg = "INSERT INTO plan_dia(fk_dia_semana_id, qtd_hrs) 
-VALUES('1', '$hrs_seg',)";
 
-$sql_ter = 
 
 
 
