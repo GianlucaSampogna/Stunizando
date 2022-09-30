@@ -21,7 +21,7 @@
                                 <li class="nav-item">
                                     <a href="secao_meu_perfil.php" class="nav-link color">Meu perfil</a></li>
                                 <li class="nav-item">
-                                    <a href="meu_plano_estudo.php" class="nav-link color">Planejamento</a>
+                                    <a href="meu_plano_estudo.php" class="nav-link color">Planejamentos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="logout.php" class="nav-link color">Sair</a>

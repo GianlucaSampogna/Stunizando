@@ -66,11 +66,12 @@ $hrs_dom = $_POST['hrs_dom'];
 
 //insere os dados na tabela do banco dee dados
 $sql = "INSERT INTO planejamento(nome, dt_inicio,dt_final, fk_usuario_id) 
-         VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario) RETURNING ID";
+         VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario)returnin ID";
 $result = pg_query($conexao, $sql);
 
+$ultimoID = 
 
-$ultimoID = pg_fetch_array($result,0)[0];
+
 
 $i = 0;
 $num = 1;
@@ -80,17 +81,23 @@ list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info;
 for ($i = 0; $i <=6; $i++){
     $sql = "INSERT INTO plan_dia ( fk_dia_semana_id, qtd_horas) 
     VALUES('$num', '$info[$i]') ";
-    $result = pg_query($conexao, $sql);
+    pg_query($conexao, $sql);
     $num = $num + 1;
 }
 
 
+$info = array($matematica, $portugues , $fisica, $biologia, $quimica, $geografia, $historia);
+list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info; 
+$num = 1;
+for ($i = 0; $i <=6; $i++){
+    $sql = "INSERT INTO plan_disc (fk_disciplinas_id, FAZER) 
+    VALUES('$num', '$info') ";
+    pg_query($conexao, $sql);
+    $num = $num + 1;
+}header("Location: materias.php");
 
 
 
-if (pg_query($conexao, $sql)){  
-    header("Location: materias.php");
-}
 
 pg_close($conexao);
 ?>
