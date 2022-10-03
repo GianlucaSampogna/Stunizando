@@ -69,11 +69,6 @@ $sql = "INSERT INTO planejamento(nome, dt_inicio, dt_fim, fk_usuario_id)
          VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario)";
 $result = pg_query($conexao, $sql);
 //return in ID;
-IF(!$result){
-    echo 'nao foi';
-}
-
-
 
 $i = 0;
 $num = 1;
@@ -82,7 +77,7 @@ list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info;
 
 for ($i = 0; $i <=6; $i++){
     $sql = "INSERT INTO plan_dia ( fk_dia_semana_id, qtd_horas) 
-    VALUES('$num', '$info[$i]') ";
+    VALUES($num, $info[$i]) ";
     pg_query($conexao, $sql);
     $num = $num + 1;
 }
@@ -93,7 +88,8 @@ list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info;
 $num = 1;
 for ($i = 0; $i <=6; $i++){
     $sql = "INSERT INTO plan_disc (fk_disciplinas_id, FAZER) 
-    VALUES('$num', '$info[$i]') ";
+    VALUES($num, $info[$i]) ";
+    echo $sql;
     pg_query($conexao, $sql);
     $num = $num + 1;
 }
