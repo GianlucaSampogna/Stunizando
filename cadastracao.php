@@ -20,7 +20,7 @@ $emailvalidate = filter_var($email,FILTER_VALIDATE_EMAIL);
 $senha = password_hash($senha, PASSWORD_DEFAULT);
 
 //insere os dados na tabela do banco dee dados
-$sql = "INSERT INTO usuario(nome,sobrenome,email,celular,sexo,senha) 
+$sql = "INSERT INTO usuario(nome,sobrenome,email,celular,genero,senha) 
          VALUES('$nome','$sobrenome','$emailvalidate','$celular','$genero','$senha')";    
 
    $data = pg_query($conexao, $sql);
