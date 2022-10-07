@@ -36,7 +36,7 @@ $id = $_SESSION['id'];
         </div>
         <div class="mb-3 ml-5 w-50 d-block">
             <label for="exampleInputEmail1" class="form-label">Genero:</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['sexo']; ?>">
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados['genero']; ?>">
         </div>
     </div>
 </div>

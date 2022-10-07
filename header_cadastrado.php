@@ -13,7 +13,7 @@
                     <!--menu responsivo-->
                     
                         <!--criando e colapsando os links do menu-->
-                        <div class="collapse navbar-collapse" id="nav-principal">
+                        <div class="collapse navbar-collapse" id="nav-principal" class="headerstunizado">
                             <ul class="navbar-nav ml-auto font-weight-bold">
                                 <li class="nav-item">
                                     <a href="materias.php" class="nav-link color">Matérias</a>
