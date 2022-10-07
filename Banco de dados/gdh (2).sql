@@ -1,117 +1,141 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Tempo de geração: 26-Ago-2022 às 13:16
--- Versão do servidor: 5.6.51
--- versão do PHP: 8.0.7
+/* Lógico_1: */
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE TABLE USUARIO (
+    ID SERIAL PRIMARY KEY,
+    NOME VARCHAR(50),
+    SOBRENOME VARCHAR(50),
+    EMAIL VARCHAR(100),
+    CELULAR VARCHAR(50),
+    GENERO VARCHAR(50),
+    SENHA VARCHAR(300)
+);
 
+CREATE TABLE DISCIPLINAS (
+    NOME VARCHAR(50),
+    ID INTEGER PRIMARY KEY
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE TABLE CONTEUDOS (
+    NOME VARCHAR(100),
+    ID INTEGER PRIMARY KEY,
+    COD_DISCIPLINA INTEGER,
+    FK_DISCIPLINAS_ID INTEGER
+);
 
---
--- Banco de dados: `gdh`
---
+CREATE TABLE PLANEJAMENTO (
+    NOME VARCHAR(50),
+    DT_INICIO DATE,
+    DT_FIM DATE,
+    FK_USUARIO_ID SERIAL
+);
 
--- --------------------------------------------------------
+CREATE TABLE DIA_SEMANA (
+    ID INTEGER PRIMARY KEY,
+    NOME VARCHAR(100)
+);
 
---
--- Estrutura da tabela `meu_plano_estudo`
---
+CREATE TABLE PLAN_DISC (
+    FK_DISCIPLINAS_ID INTEGER,
+    FAZER INTEGER,
+    ID INTEGER PRIMARY KEY
+);
 
-CREATE TABLE `meu_plano_estudo` (
-  `inicio_data` date NOT NULL,
-  `data_prova` date NOT NULL,
-  `portugues` int(11) NOT NULL,
-  `matematica` int(11) NOT NULL,
-  `geografia` int(11) NOT NULL,
-  `historia` int(11) NOT NULL,
-  `quimica` int(11) NOT NULL,
-  `fisica` int(11) NOT NULL,
-  `biologia` int(11) NOT NULL,
-  `hrs_seg` int(11) NOT NULL,
-  `hrs_ter` int(11) NOT NULL,
-  `hrs_qua` int(11) NOT NULL,
-  `hrs_qui` int(11) NOT NULL,
-  `hrs_sex` int(11) NOT NULL,
-  `hrs_sab` int(11) NOT NULL,
-  `hrs_dom` int(11) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE PLAN_DIA (
+    FK_DIA_SEMANA_ID INTEGER,
+    QTD_HORAS INTEGER,
+    ID INTEGER PRIMARY KEY
+);
+ 
+ALTER TABLE CONTEUDOS ADD CONSTRAINT FK_CONTEUDOS_2
+    FOREIGN KEY (FK_DISCIPLINAS_ID)
+    REFERENCES DISCIPLINAS (ID)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE PLANEJAMENTO ADD CONSTRAINT FK_PLANEJAMENTO_1
+    FOREIGN KEY (FK_USUARIO_ID)
+    REFERENCES USUARIO (ID)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE PLAN_DISC ADD CONSTRAINT FK_PLAN_DISC_2
+    FOREIGN KEY (FK_DISCIPLINAS_ID)
+    REFERENCES DISCIPLINAS (ID)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE PLAN_DIA ADD CONSTRAINT FK_PLAN_DIA_2
+    FOREIGN KEY (FK_DIA_SEMANA_ID)
+    REFERENCES DIA_SEMANA (ID)
+    ON DELETE RESTRICT;
 
--- --------------------------------------------------------
+insert into disciplinas (nome, id) values
+('Matematica', 1),
+('Portugues', 2),
+('Fisica', 3),
+('Biologia', 4),
+('Quimica', 5),
+('Geografia', 6),
+('Historia', 7);
 
---
--- Estrutura da tabela `usuario`
---
+insert into conteudos (nome, id, fk_disciplinas_id) values
+('Trigonometria', 1, 1),
+('Estatistica', 2, 1),
+('Logaritmo', 3, 1),
+('Probabilidade', 4, 1),
+('Equacao de 1 grau', 5, 1),
+('Triangulos', 6, 1),
+('Matematica basica', 7, 1),
+('Analise de poemas', 8, 2),
+('Generos e tipos textuais', 9, 2),
+('Recursos expressivos', 10, 2),
+('Figuras de linguagem', 11, 2),
+('Romantismo', 12, 2),
+('Realismo', 13, 2),
+('Modernismo', 14, 2),
+('Eletrodinamica', 15, 3),
+('Termologia', 16, 3),
+('Ondulatoria', 17, 3),
+('Dinamica', 18, 3),
+('Eletricidade', 19, 3),
+('Hidrostatica', 20, 3),
+('Optica', 21, 3),
+('Fisiologia humana', 22, 4),
+('Ecologia', 23, 4),
+('Humana', 24, 4),
+('Genetica', 25, 4),
+('Impactos ambientais', 26, 4),
+('Energia celular', 27, 4),
+('Citologia', 28, 4),
+('Quimica organica', 29, 5),
+('Estequiometria', 30, 5),
+('Pilha', 31, 5),
+('Entalpia', 32, 5),
+('Sistemas e misturas', 33, 5),
+('Forcas intermoleculares', 34, 5),
+('Entalpia', 35, 5),
+('Globalizacao', 36, 6),
+('Tectonismo', 37, 6),
+('Demografia', 38, 6),
+('Urbanizacao', 39, 6),
+('Industria cultural', 40, 6),
+('Clima', 41, 6),
+('Relevo', 42, 6),
+('Brasil imperio', 43, 7),
+('Era Vargas', 44, 7),
+('Guerra Fria', 45, 7),
+('Queda do feudalismo', 46, 7),
+('Imperio romano', 47, 7),
+('Escravidao e pacto colonial', 48, 7),
+('Antiguidade oriental', 49, 7);
 
-CREATE TABLE `usuario` (
-  `id` int(100) NOT NULL,
-  `nome` varchar(300) NOT NULL,
-  `sobrenome` varchar(300) NOT NULL,
-  `email` varchar(300) NOT NULL,
-  `celular` varchar(20) NOT NULL,
-  `genero` varchar(100) NOT NULL,
-  `senha` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into dia_semana (id, nome) values
+(1, 'Segunda feira'),
+(2, 'Terca feira'),
+(3, 'Quarta feira'),
+(4, 'Quinta feira'),
+(5, 'Sexta feira'),
+(6, 'Sabado'),
+(7, 'Domingo');
 
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`id`, `nome`, `sobrenome`, `email`, `celular`, `genero`, `senha`) VALUES
-(7, 'Miguel', 'Abreu', 'de_lemos@gmail.com', '27595845125', 'MASCULINO', '$2y$10$kGi/8DPiY4AwGMJ3XQuowObHr0F7Lmf8T4ROmHVo5gv.0TS54IA.W'),
-(27, 'juan', 'ferreira', 'juan@gmail.com', '27999888777', 'MASCULINO', '$2y$10$SQTv6JgZm3QkNwTVniHuH.KWBK4BsMLlDsEYl0ddIXbXP6hP7hG4a'),
-(34, 'Lavinia', 'Mariano', 'Lala@outlook.com', '27 997330514', 'FEMININO', '$2y$10$pTnC2Mw.7JDkD0pXfwjC..DfuSRtv1WHE9Tt3eQxz8X.77ioy129W'),
-(35, 'fdssdsacdsa', 'adsc', 'Lala@outlook.com', '27 997330514', 'MASCULINO', '$2y$10$7zH9w560HVV317h7.Bwq1ulkuvBUJNU/XU4V6zSSV/TmpuZjvLE4W'),
-(36, 'Gianluca', 'Sampogna', 'gianlucascalzisampogna@gmail.com', '27997330514', 'MASCULINO', '$2y$10$Ha8OeIB78GXRLmMdk.KF6ejEGqO.gmhyDQZ3zdNNBtNOG4cCBwvl.'),
-(37, 'asd', 'asd', 'asd@a.c', '27 997330514', 'P', '$2y$10$94X5OUjkWoBoWJqg7JGdGezFRDgBob8bRKL5B6gYbN4ptYv/vknAy'),
-(38, 'bruno', 'atila', 'brunoatila@gmail.com', '27999994855', 'MASCULINO', '$2y$10$j87gQk6Sp.4huyn3cBKq3eFq0s6XbWb7vQlgP7uwaJ93mXbYOcJq.'),
-(39, 'gian', 'liuca', 'gian@gmail.com', '25154145145', 'MASCULINO', '$2y$10$o.JNBeLiZqS0WidWmd76feL1WIFdpFPE/lLDmaLYDZiGlQqjztogW'),
-(40, 'dsad', 'asdas', 'gian@gmail.com', '145145145', 'MASCULINO', '$2y$10$.uMxWXwLDj3hkTzCvCcMWunzoymndVM3EBNkKBpeODFEeMnUJCGgS'),
-(41, 'gianluca', 'sampogna', 'gianlucascalzisampogna@gmail.com', '27997330514', 'MASCULINO', '$2y$10$czMj3Y8H92mmKre1y6xdfu/LbEPlYjndN9SVeoF8atgqUUNhf0SN2');
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `meu_plano_estudo`
---
-ALTER TABLE `meu_plano_estudo`
-  ADD PRIMARY KEY (`id`,`data_prova`);
-
---
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `meu_plano_estudo`
---
-ALTER TABLE `meu_plano_estudo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+insert into usuario values 
+(0, 'ADM','ADM' ,'ADM@ADM.COM','27997330514', 'ADM', '$2y$10$1IM1Eq0gbCAHoYj6TSy8sO1ynvrxWcdmjvevjU4QfTBzC3N.aLCvS' ); 
+/*usuário=ADM@ADM.COM
+senha = adm*/
