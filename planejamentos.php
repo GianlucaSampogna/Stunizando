@@ -39,13 +39,13 @@ include_once 'conexao.php';
     </br>
     <div class="container">
         <div class="card text-center ">
-            <button type="button"  class="btn btn-outline-primary"><a id="a" href="meu_plano_estudo.php">CRIAR UM NOVO PLANEJAMENTO</a></button>
+            <button type="button" class="btn btn-outline-primary"><a id="a" href="meu_plano_estudo.php">CRIAR UM NOVO PLANEJAMENTO</a></button>
         </div>
 
     </div>
 
 </div>
 
-    <?php
-    include_once 'final.php';
-    ?>
+<?php
+include_once 'final.php';
+?>

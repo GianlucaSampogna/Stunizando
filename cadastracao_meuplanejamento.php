@@ -71,6 +71,19 @@ $result = pg_query($conexao, $sql);
 
 
 
+$i = 0;
+$num = 1;
+$info = array($portugues, $matematica, $geografia, $historia, $quimica, $fisica, $biologia);
+list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info; 
+for ($i = 0; $i <=6; $i++){
+    $sql = "INSERT INTO plan_disc (fk_disciplinas_id, fazer) 
+    VALUES('$num', '$info[$i]') ";
+    $result = pg_query($conexao, $sql);
+    $num = $num + 1;
+}
+
+
+
 
 $i = 0;
 $num = 1;
