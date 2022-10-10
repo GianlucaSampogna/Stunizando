@@ -25,6 +25,9 @@ $id = $_SESSION['id'];
                     <li class="nav-item ">
                         <a href="pagina_adm.php" class="nav-link color">Pagina do adiministrador</a>
                     </li>
+                    <li class="nav-item ">
+                        <a href="logout.php" class="nav-link color">Sair</a>
+                    </li>
                 </ul>
             </div>
 
@@ -80,23 +83,16 @@ $sql = "SELECT count(fk_disciplinas_id) FROM plan_disc WHERE fk_disciplinas_id=7
 $result = pg_query($conexao, $sql);
 $planejamentos_bio = pg_fetch_array($result);
 
-//$sql = 1;
-//while ($sql){
-$sql = "SELECT (celular) FROM usuario WHERE id != 0";
-$celulares = array();
+$num = 1;
+while (isset($sql)){
+$sql = "SELECT (nome, sobrenome, celular) FROM usuario WHERE id = $num";
 $result = pg_query($conexao, $sql);
+$dados = array($result);
+$num = $num + 1;
+$sql = "";
+}
 
 
-//for ($i=0; $i<10 ;$i++){
-//    print_r($sql[$i]);
-    //$celulares = "SELECT (celular) FROM usuario WHERE id != 0"
-//}
-
-
-//$celulares = pg_fetch_array($result);
-
-//print_r($celulares);
-//
 
 ?>
 
@@ -169,8 +165,8 @@ $result = pg_query($conexao, $sql);
 
 
         <div class="mb-3 ml-5 w-50 d-block">
-            <label for="exampleInputEmail1" class="form-label">Lista de todos os números:</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $planejamentos_bio['count']; ?>">
+            <label for="exampleInputEmail1" class="form-label">Lista de todos os números de celular:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados; ?>">
         </div>
 
     </div>

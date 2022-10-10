@@ -13,14 +13,15 @@
             <!--criando e colapsando os links do menu-->
             <div class="collapse navbar-collapse" id="nav-principal" class="headerstunizado">
                 <ul class="navbar-nav ml-auto font-weight-bold">
+
                     <li class="nav-item">
-                        <a href="materias.php" class="nav-link color">Matérias</a>
+                        <a href="planejamentos.php" class="nav-link color">Planejamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="secao_meu_perfil.php" class="nav-link color">Meu perfil</a>
+                        <a href="meu_plano_estudo.php" class="nav-link color">Criar um planejamento</a>
                     </li>
                     <li class="nav-item">
-                        <a href="meu_plano_estudo.php" class="nav-link color">Planejamentos</a>
+                        <a href="secao_meu_perfil.php" class="nav-link color">Perfil</a>
                     </li>
                     <li class="nav-item">
                         <a href="logout.php" class="nav-link color">Sair</a>

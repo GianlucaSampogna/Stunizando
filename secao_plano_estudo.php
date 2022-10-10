@@ -1,7 +1,7 @@
 <?php
-include_once 'conexao.php';
-include_once 'header_cadastrado.php';
 include_once 'protect.php';
+include_once 'header_cadastrado.php';
+
 ?>
 
 <h1>SEUS PLANEJAMENTOS</h1>

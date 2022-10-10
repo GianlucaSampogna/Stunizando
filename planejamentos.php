@@ -21,10 +21,10 @@ include_once 'conexao.php';
             while ($linha = pg_fetch_array($result)) { ?>
                 <br><br>
                 <div class="card-body">
+                    <form action="pagina_estudo.php" method="post"></form>
                     <h5 class="card-title"><?php echo $linha["nome"] ?></h5>
                     <p class="card-text">ESSE É O SEU <?php echo $num ?> PLANEJAMENTO</p>
-                    <a href="#" class="btn btn-primary">Acessar</a>
-
+                    <a href="pagina_estudo.php" class="btn btn-primary"><input type="submit" value="Acessar"></a>
                 </div>
                 <hr>
 
