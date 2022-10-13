@@ -25,10 +25,11 @@ include_once 'conexao.php';
                     <p class="card-text">ESSE É O SEU <?php echo $num ?> PLANEJAMENTO</p>
 
                     <form action="pagina_estudo.php" method="post">
-                        <button type="submit" name="id" value="<?php echo $linha["id"]?>">ACESSAR</button>
+                        <button class="botao_planejamento" type="submit" name="id" value="<?php echo $linha["id"]?>">ACESSAR</button>
                     </form>
                     
                 <hr>
+                </div>
 
         <?php
                 $num = $num + 1;

@@ -65,13 +65,22 @@ $hrs_dom = $_POST['hrs_dom'];
 
 
 //insere os dados na tabela do banco dee dados
-$sql = "INSERT INTO planejamento(nome, dt_inicio,dt_fim, fk_usuario_id) 
-         VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario)returning id";
+$sql = "INSERT INTO planejamento(nome, dt_inicio,dt_fim, fk_usuario_id)
+         VALUES('$nome_planejamento', '$inicia_data', '$data_prova', $id_usuario)RETURNING id";
 $result = pg_query($conexao, $sql);
-$id_do_planejamento = 'SELECT SCOPE_IDENTITY($result)';
-
 $linha = pg_fetch_array($result);
-$id_do_planejamento = $linha['id'];
+
+
+
+
+
+
+
+
+// $id_do_planejamento = 'SELECT SCOPE_IDENTITY($result)';
+
+// $linha = pg_fetch_array($result);
+// $id_do_planejamento = $linha['id'];
 
 
 
@@ -83,7 +92,7 @@ $info = array($portugues, $matematica, $geografia, $historia, $quimica, $fisica,
 list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info; 
 for ($i = 0; $i <=6; $i++){
     $sql = "INSERT INTO plan_disc (fk_disciplinas_id, fazer, id_planejamento) 
-    VALUES('$num', '$info[$i]', '$id_do_planejamento') ";
+    VALUES('$num', '$info[$i]', '$linha[id]') ";
     $result = pg_query($conexao, $sql);
     $num = $num + 1;
 }
@@ -98,7 +107,7 @@ list($a[0], $a[1], $a[2], $a[3], $a[4], $a[5], $a[6],) = $info;
 
 for ($i = 0; $i <=6; $i++){
     $sql = "INSERT INTO plan_dia (fk_dia_semana_id, qtd_horas, id_planejamento) 
-    VALUES('$num', '$info[$i], ', '$id_do_planejamento') ";
+    VALUES('$num', '$info[$i]', '$linha[id]') ";
     $result = pg_query($conexao, $sql);
     $num = $num + 1;
 }header("Location: planejamentos.php");

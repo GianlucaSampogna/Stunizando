@@ -24,7 +24,7 @@ $diff=date_diff($date1,$date2); //AQUI RETORNA A DIFERENÇA, EM DIAS DA DATA QUE
 $sql= "SELECT fazer=1 FROM plan_disc WHERE id_planejamento = $id_planejamento"; 
 $result =pg_query($conexao, $sql);
 $linha = pg_fetch_array($result);
-$materias = $linha //AQUI RETORNA AS MATÉRIAS QUE A PESSOA IRÁ ESTUDAR
+$materias = $linha; //AQUI RETORNA AS MATÉRIAS QUE A PESSOA IRÁ ESTUDAR
 
 
 
