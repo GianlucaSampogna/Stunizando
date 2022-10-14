@@ -14,41 +14,110 @@ $dt_inicio = $linha['dt_inicio']; //AQUI RETORNA A DATA QUE O USUÁRIO COLOCOU Q
 $dt_final = $linha['dt_fim']; //AQUI RETORNA A DATA QUE O USÁRIO COLOCOU QUE IRIA FINALIZAR O PROJETO
 //$data_final = date('d/m/Y', strtotime($dt_final));
 
-$nome_planejamento = $linha['nome'];//AQUI RETORNA O NOME DO PLANEJAMENTO
+$nome_planejamento = $linha['nome']; //AQUI RETORNA O NOME DO PLANEJAMENTO
 
-$date1=date_create($dt_inicio);
-$date2=date_create($dt_final);
-$diff=date_diff($date1,$date2); //AQUI RETORNA A DIFERENÇA, EM DIAS DA DATA QUE A PESSOA COLOCOU QUE IRIA COMEÇAR O PROJETO, PARA O DIA QUE IRÁ FINALIZAR
+$date1 = date_create($dt_inicio);
+$date2 = date_create($dt_final);
+$diff = date_diff($date1, $date2); //AQUI RETORNA A DIFERENÇA, EM DIAS DA DATA QUE A PESSOA COLOCOU QUE IRIA COMEÇAR O PROJETO, PARA O DIA QUE IRÁ FINALIZAR
 //echo $diff->format("%a");
 
-$sql= "SELECT nome FROM disciplinas INNER JOIN plan_disc ON (plan_disc.fk_disciplinas_id = disciplinas.id) WHERE id_planejamento = $id_planejamento"; 
-$result =pg_query($conexao, $sql);
+$sql = "SELECT nome FROM disciplinas INNER JOIN plan_disc ON (plan_disc.fk_disciplinas_id = disciplinas.id) WHERE id_planejamento = $id_planejamento";
+$result = pg_query($conexao, $sql);
 $materias = pg_fetch_all($result);
 
 
-$sql= "SELECT fk_dia_semana_id, qtd_horas FROM plan_dia WHERE id_planejamento = $id_planejamento";
+$sql = "SELECT dia_semana.nome, plan_dia.qtd_horas FROM dia_semana INNER JOIN plan_dia ON (dia_semana.id = plan_dia.fk_dia_semana_id) WHERE id_planejamento = $id_planejamento";
 $result = pg_query($conexao, $sql);
-$linha = pg_fetch_array($result);
-$dias_horas = $linha;
+$linha = pg_fetch_all($result);
 ?>
 
 <section>
     <div>
         <h3> INFORMAÇOES DO PLANEJAMENTO</h3>
         <P>
-            Nessa parte nós iremos criar um planejamento para você com base nos dias que o senhor informou, serão <strong><?php echo $diff->format("%a");?> dias de estudo.</strong><br>
-            Você irá estudar as disciplinas de:<strong> <?php foreach ($materias as $coluna){
-                                                                        print_r ($coluna['nome']);
-                                                                        echo ", ";
-                                                                        
-    }   ?></strong>.
-            <br>No qual será estudado as seguintes horas nos seguintes dias: <?php   ?>
-            
+            Nessa parte nós iremos criar um planejamento para você com base nos dias que o senhor informou, serão <strong><?php echo $diff->format("%a"); ?> dias de estudo.</strong><br><br>
+            Você irá estudar as disciplinas de:
+            <strong> <?php foreach ($materias as $coluna) {
+                            print_r($coluna['nome']);
+                            echo " ; ";
+                        }   ?></strong>.<br><br>
+
+
+
+
+
+
+
+
+            Estudando as seguintes matérias:
+
+            <?php $sql = "SELECT fk_disciplinas_id FROM plan_disc WHERE fazer =1 AND id_planejamento = $id_planejamento";
+            $resultado = pg_query($conexao, $sql);
+            $num_disc = pg_fetch_all($resultado);
+
+            $ids_disc = (string)$num_disc[0]['fk_disciplinas_id'];
+            for ($i = 1; $i < count($num_disc); $i++) {
+                $ids_disc = $ids_disc . " OR  fk_disciplinas_id =" . (string)$num_disc[$i]['fk_disciplinas_id'];
+                $ids_disc2 = $ids_disc . ", " . (string)$num_disc[$i]['fk_disciplinas_id'];
+            }
+            // echo $ids_disc2;
+
+
+
+            $sql = "SELECT * FROM conteudos WHERE fk_disciplinas_id = $ids_disc";
+            $result = pg_query($conexao, $sql);
+            $materias_totais = pg_fetch_all($result);
+            echo "<br>";
+            foreach ($materias_totais as $materias_total) {
+                echo "<strong>" . $materias_total['nome'] . "</strong>" . " ; ";
+            }
+            ?>
+            <br>
+
+
+            <br>No qual será estudado as seguintes horas nos seguintes dias: <br>
+            <?php
+            $hrs_semana = 0;
+            foreach ($linha as $coluna) {
+                print_r($coluna['nome']);
+                echo ": ";
+                echo "<strong>";
+                print_r($coluna['qtd_horas']);
+                echo "</strong>";
+                echo " hrs; <br>";
+                $hrs_semana = $hrs_semana + $coluna['qtd_horas'];
+            } ?>. <br>
+
+
         </P>
     </div>
 </section>
 
 <?php
-include_once 'final.php';
+$n_dias = (int) $diff->format("%a");
+$diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado');
+$diasemana_numero = date('w', strtotime($dt_inicio));
+$dia_semana_inicial = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA EM QUE A PESSOA COMEÇOU A ESTUDAR
+$diasemana_numero = date('w', strtotime($dt_final));
+$dia_semana_final = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA FINAL
+$horas_totais = (int)(($n_dias / 7) * $hrs_semana);
+echo $horas_totais;
+
+
+
+
+
+$sql = "SELECT id FROM conteudos WHERE fk_disciplinas_id = $ids_disc ";
+$result = pg_connect($conexao, $sql);
+$conteudos_totais = pg_fetch_array($result) // ACHAR AQUI A QUATIDADE TOTAIS DE CONTEUDOS DAS PESSOAS
+
+//$hrs_total = $diff/7;
+
+
+
+
 ?>
 
+<?php
+include_once 'final.php';
+?>

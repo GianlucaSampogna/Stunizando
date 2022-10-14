@@ -84,14 +84,9 @@ $result = pg_query($conexao, $sql);
 $planejamentos_bio = pg_fetch_array($result);
 
 $num = 1;
-while (isset($sql)){
-$sql = "SELECT (nome, sobrenome, celular) FROM usuario WHERE id = $num";
+$sql = "SELECT * FROM usuario";
 $result = pg_query($conexao, $sql);
-$dados = array($result);
-$num = $num + 1;
-$sql = "";
-}
-
+$dados = pg_fetch_all($result);
 
 
 ?>
@@ -166,12 +161,22 @@ $sql = "";
 
         <div class="mb-3 ml-5 w-50 d-block">
             <label for="exampleInputEmail1" class="form-label">Lista de todos os números de celular:</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" disabled value="<?php echo $dados; ?>">
+            <input type="text" id="campo_tel" class="form-control" id="exampleInputEmail1" disabled value="<?php
+                                                                                            foreach ($dados as $coluna) {
+                                                                                                print_r($coluna['nome']);
+                                                                                                echo "=>";
+                                                                                                print_r($coluna['celular']);
+                                                                                                echo "  ;  ";
+                                                                                            } 
+                                                                                            ?>"
+            >
         </div>
 
     </div>
 </div>
 
 <?php
+
+
 include_once 'final.php';
 ?>
