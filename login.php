@@ -24,13 +24,18 @@ if (isset($_POST['email']) || isset($_POST['password'])) {
         if ($num_rows > 0) {
 
             $usuario = pg_fetch_array($result);
+
+           // echo '<pre>';
+            //print_r($usuario);
+            //echo '</pre>'; exit;
+
             if (password_verify($senha, $usuario['senha'])) {
                 session_start();
                 $_SESSION['id'] = $usuario['id'];
-                if ($usuario['id'] != 0) {
-                    header("Location: materias.php");
-                }else{
+                if ($usuario['id'] == 0) {
                     header("Location: pagina_adm.php");
+                }else{
+                    header("Location: materias.php");
                 }
                 
             }
