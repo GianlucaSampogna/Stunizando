@@ -100,18 +100,10 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
 $dia_semana_inicial = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA EM QUE A PESSOA COMEÇOU A ESTUDAR
 $diasemana_numero = date('w', strtotime($dt_final));
 $dia_semana_final = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA FINAL
-$horas_totais = (int)(($n_dias / 7) * $hrs_semana);
-echo $horas_totais;
+$horas_totais = (int)(($n_dias / 7) * $hrs_semana); // AQUI RETORNA A QUANTIDADE DE HORAS TOTAIS QUE ESSA PESSOA IRÁ ESTUDAR
+$qtd_materias_pessoa = count($materias_totais); //AQUI RETORNA A QUANTIDADE DE MATÉRIAS QUE O USUÁRIO IRÁ ESTUDAR
+$horas_por_materia =  $horas_totais / $qtd_materias_pessoa; //AQUI RETORNA A MÉDIA DE QUANTO A PESSOA IRÁ ESTUDAR POR MATÉRIA
 
-
-
-
-
-$sql = "SELECT id FROM conteudos WHERE fk_disciplinas_id = $ids_disc ";
-$result = pg_connect($conexao, $sql);
-$conteudos_totais = pg_fetch_array($result) // ACHAR AQUI A QUATIDADE TOTAIS DE CONTEUDOS DAS PESSOAS
-
-//$hrs_total = $diff/7;
 
 
 
