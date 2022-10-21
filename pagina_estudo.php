@@ -31,6 +31,25 @@ $result = pg_query($conexao, $sql);
 $linha = pg_fetch_all($result);
 ?>
 
+<div id="calendar"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    height: 1000,
+    events: 'eventos_calendario.php',
+    initialDate: '2020-09-12',
+  });
+
+  calendar.render();
+});
+</script>
+
+
+
 <section>
     <div>
         <h3> INFORMAÇOES DO PLANEJAMENTO</h3>
@@ -51,7 +70,8 @@ $linha = pg_fetch_all($result);
 
             Estudando as seguintes matérias:
 
-            <?php $sql = "SELECT fk_disciplinas_id FROM plan_disc WHERE fazer =1 AND id_planejamento = $id_planejamento";
+            <?php 
+            $sql = "SELECT fk_disciplinas_id FROM plan_disc WHERE fazer =1 AND id_planejamento = $id_planejamento";
             $resultado = pg_query($conexao, $sql);
             $num_disc = pg_fetch_all($resultado);
 
@@ -103,12 +123,19 @@ $dia_semana_final = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMAN
 $horas_totais = (int)(($n_dias / 7) * $hrs_semana); // AQUI RETORNA A QUANTIDADE DE HORAS TOTAIS QUE ESSA PESSOA IRÁ ESTUDAR
 $qtd_materias_pessoa = count($materias_totais); //AQUI RETORNA A QUANTIDADE DE MATÉRIAS QUE O USUÁRIO IRÁ ESTUDAR
 $horas_por_materia =  $horas_totais / $qtd_materias_pessoa; //AQUI RETORNA A MÉDIA DE QUANTO A PESSOA IRÁ ESTUDAR POR MATÉRIA
+echo($horas_por_materia);
+
+
+
 
 
 
 
 
 ?>
+
+
+
 
 <?php
 include_once 'final.php';

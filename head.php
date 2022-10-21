@@ -19,6 +19,9 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         />
+        <link href="js/fullcalendar/lib/main.css" rel="stylesheet" />
+        <script src="js/fullcalendar/lib/main.js"></script>
+
     
 
         <!-- Estilo customizado -->
