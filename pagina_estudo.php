@@ -67,10 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+            
+            Estudando as seguintes matérias: 
 
-            Estudando as seguintes matérias:
-
-            <?php 
+            <?php  //AQUI PEGA TODAS AS MATÉRIAS QUE TEM O ID DA PESSOA
             $sql = "SELECT fk_disciplinas_id FROM plan_disc WHERE fazer =1 AND id_planejamento = $id_planejamento";
             $resultado = pg_query($conexao, $sql);
             $num_disc = pg_fetch_all($resultado);
@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 $ids_disc = $ids_disc . " OR  fk_disciplinas_id =" . (string)$num_disc[$i]['fk_disciplinas_id'];
                 $ids_disc2 = $ids_disc . ", " . (string)$num_disc[$i]['fk_disciplinas_id'];
             }
-            // echo $ids_disc2;
 
 
 
@@ -115,15 +114,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <?php
 $n_dias = (int) $diff->format("%a");
-$diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado');
+$diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta feira', 'Quinta', 'Sexta', 'Sabado');
 $diasemana_numero = date('w', strtotime($dt_inicio));
 $dia_semana_inicial = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA EM QUE A PESSOA COMEÇOU A ESTUDAR
 $diasemana_numero = date('w', strtotime($dt_final));
 $dia_semana_final = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA FINAL
 $horas_totais = (int)(($n_dias / 7) * $hrs_semana); // AQUI RETORNA A QUANTIDADE DE HORAS TOTAIS QUE ESSA PESSOA IRÁ ESTUDAR
 $qtd_materias_pessoa = count($materias_totais); //AQUI RETORNA A QUANTIDADE DE MATÉRIAS QUE O USUÁRIO IRÁ ESTUDAR
-$horas_por_materia =  $horas_totais / $qtd_materias_pessoa; //AQUI RETORNA A MÉDIA DE QUANTO A PESSOA IRÁ ESTUDAR POR MATÉRIA
-echo($horas_por_materia);
+$horas_por_materia = (int)($horas_totais / $qtd_materias_pessoa); //AQUI RETORNA A MÉDIA DE QUANTO A PESSOA IRÁ ESTUDAR POR MATÉRIA
+for ($i=0; $i < count($materias_totais); $i++){
+    $mat_pessoa[] = $materias_totais[$i]['nome'];
+    $mat_pessoa['hora']= $horas_por_materia;
+} //AQUI RETORNA UMA LISTA COM O NOME E A QTD DE HORAS QUE SERÁ ESTUDADA DESSA MATÉRIA
+$i = 0;
+
+echo $coluna[$dia_semana_inicial]['qtd_horas'];
+
+
+while ($mat_pessoa[count($mat_pessoa)] != 0){
+    while($mat_pessoa[$i]['hora'] != 0){
+        if ($mat_pessoa[$i]['hora'] > $coluna[$dia_semana_inicial]['qtd_horas']){
+
+        }
+        
+    }
+}
+
+
+
+    
+
+
+
 
 
 

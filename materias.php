@@ -77,6 +77,6 @@ $nome_da_pagina = 'matérias';
         <!--fim div principal-->
 
 <?php
-require_once 'footer_cadastrado.php';
+
 include_once 'final.php';
 ?>
