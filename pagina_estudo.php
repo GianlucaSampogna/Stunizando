@@ -25,7 +25,6 @@ $sql = "SELECT nome FROM disciplinas INNER JOIN plan_disc ON (plan_disc.fk_disci
 $result = pg_query($conexao, $sql);
 $materias = pg_fetch_all($result);
 
-
 $sql = "SELECT dia_semana.nome, plan_dia.qtd_horas FROM dia_semana INNER JOIN plan_dia ON (dia_semana.id = plan_dia.fk_dia_semana_id) WHERE id_planejamento = $id_planejamento";
 $result = pg_query($conexao, $sql);
 $linha = pg_fetch_all($result);
@@ -128,7 +127,14 @@ for ($i=0; $i < count($materias_totais); $i++){
 } //AQUI RETORNA UMA LISTA COM O NOME E A QTD DE HORAS QUE SERÁ ESTUDADA DESSA MATÉRIA
 $i = 0;
 
-echo $coluna[$dia_semana_inicial]['qtd_horas'];
+
+print_r($linha['qtd_horas']);
+
+
+foreach ($mat_pessoa as $dia){
+    print_r($dia['hora']); 
+}
+
 
 
 while ($mat_pessoa[count($mat_pessoa)] != 0){
@@ -145,9 +151,16 @@ while ($mat_pessoa[count($mat_pessoa)] != 0){
     
 
 
+/*
+SELECT conteudos.nome, plan_dia.qtd_horas FROM plan_dia
+inner join planejamento on plan_dia.id_planejamento = planejamento.id
+inner join plan_disc on plan_disc.id_planejamento = planejamento.id
+inner join disciplinas on disciplinas.id = plan_disc.fk_disciplinas_id
+inner join conteudos on conteudos.fk_disciplinas_id = disciplinas.id
+inner join usuario on planejamento.fk_usuario_id = usuario.id
 
-
-
+where planejamento.id = 23
+*/
 
 
 
