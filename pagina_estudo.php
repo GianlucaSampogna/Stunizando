@@ -80,27 +80,50 @@ $i = 0;
 $materia_atual = 0;
 $horas_dia_seguinte = 0;
 $dia = strtotime($dt_inicio);
-while($i < $n_dias){
-    $num_hrs_dia = $horas_dia[$dia_semana_atual] - $horas_dia_seguinte;
-    $qt_materias = (int)($num_hrs_dia/$horas_por_materia) + 1;
-    $horas_dia_seguinte = ($qt_materias*$horas_por_materia - $num_hrs_dia);
-    $j =0;
-    //IPRIMIRA OS VALORES PARA VER SE TA CÉRTO AS CONTAS
-    echo $qt_materias;
-    echo "<br><br>";
-    //echo (date('w', $dia));
-    while ($j<$qt_materias){
-        $nome_materia = $materias_totais[$materia_atual]['nome'];
-        echo $nome_materia;
-        //GERAR ENTRADA NO CALENDÁRIO AQUI(nome da matéria + dia)
-        $j = $j+1;
-        $materia_atual = $materia_atual +1;
+echo $horas_por_materia;
+// while($i < $n_dias){
+//     $num_hrs_dia = $horas_dia[$dia_semana_atual] - $horas_dia_seguinte;
+//     $qt_materias = (int)($num_hrs_dia/$horas_por_materia) + 1;
+//     $horas_dia_seguinte = ($qt_materias*$horas_por_materia - $num_hrs_dia);
+//     $j =0;
+//     //IPRIMIRA OS VALORES PARA VER SE TA CÉRTO AS CONTAS
+//     echo $qt_materias;
+//     echo "<br><br>";
+//     //echo (date('w', $dia));
+//     while ($j<$qt_materias){
+//         $nome_materia = $materias_totais[$materia_atual]['nome'];
+//         echo $nome_materia;
+//         //GERAR ENTRADA NO CALENDÁRIO AQUI(nome da matéria + dia)
+//         $j = $j+1;
+//         $materia_atual = $materia_atual +1;
         
+//     }
+//     echo "<br>";
+//     $dia = $dia + 86400;
+//     $i = $i+1;
+// }
+
+// while ($i < $d_dias){
+    
+//     $dia . $i = if ($)
+// }
+
+
+//AQUI TO TENTANDO CAUCULAR A QTD DE MATÉRIAS QUE IRÁ SER ESTUDADA NO DIA, OS DIAS QUE SOBRAREM, IREI COLOCAR COMO REVISÃO
+while (count($materias_totais) >= $i ){
+    if($horas_dia[$dia_semana_atual] > $horas_por_materia){
+        $dia.$i = (int)($horas_dia[$dia_semana_atual] / $horas_por_materia);
+        $i = $i + 1;
+    }elseif($horas_dia[$dia_semana_atual] = 0){
+        $dia.$i = 0;
+        $i = $i + 1;
+    }else{
+        $dia.$i = 1;
+        $i = $i + 1;
     }
-    echo "<br>";
-    $dia = $dia + 86400;
-    $i = $i+1;
 }
+
+echo $dia6;
 ?>
 
 
