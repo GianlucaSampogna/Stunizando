@@ -30,7 +30,7 @@ $sql = "SELECT dia_semana.nome, plan_dia.qtd_horas FROM dia_semana INNER JOIN pl
 $result = pg_query($conexao, $sql);
 $qtd_hs_semana = pg_fetch_all($result);
 $horas_dia = array();
-foreach ($qtd_hs_semana as $dia){
+foreach ($qtd_hs_semana as $dia) {
     $nome_semana = strtok($dia['nome'], " ");
     $horas_dia[$nome_semana] = $dia['qtd_horas'];
 }
@@ -76,11 +76,11 @@ $materias_totais; //ARRAY DE ARRAY CONTENDOTODAS AS MATÉRIAS QUE A PESSOA IRÁ 
 
 
 $cont_hrs = 0;
-$i = 0;
+$i = 1;
 $materia_atual = 0;
 $horas_dia_seguinte = 0;
 $dia = strtotime($dt_inicio);
-echo $horas_por_materia;
+
 // while($i < $n_dias){
 //     $num_hrs_dia = $horas_dia[$dia_semana_atual] - $horas_dia_seguinte;
 //     $qt_materias = (int)($num_hrs_dia/$horas_por_materia) + 1;
@@ -96,7 +96,7 @@ echo $horas_por_materia;
 //         //GERAR ENTRADA NO CALENDÁRIO AQUI(nome da matéria + dia)
 //         $j = $j+1;
 //         $materia_atual = $materia_atual +1;
-        
+
 //     }
 //     echo "<br>";
 //     $dia = $dia + 86400;
@@ -104,26 +104,61 @@ echo $horas_por_materia;
 // }
 
 // while ($i < $d_dias){
-    
+
 //     $dia . $i = if ($)
 // }
 
 
 //AQUI TO TENTANDO CAUCULAR A QTD DE MATÉRIAS QUE IRÁ SER ESTUDADA NO DIA, OS DIAS QUE SOBRAREM, IREI COLOCAR COMO REVISÃO
-while (count($materias_totais) >= $i ){
-    if($horas_dia[$dia_semana_atual] > $horas_por_materia){
-        $dia.$i = (int)($horas_dia[$dia_semana_atual] / $horas_por_materia);
-        $i = $i + 1;
-    }elseif($horas_dia[$dia_semana_atual] = 0){
-        $dia.$i = 0;
-        $i = $i + 1;
-    }else{
-        $dia.$i = 1;
-        $i = $i + 1;
+
+
+$qtd_mat_usadas = 0;
+
+$diasemana_numero = date('w', strtotime($dt_inicio));
+
+
+// $dia = "dia";
+
+$dias_mes_totais = array();
+
+
+echo count($materias_totais) . "<br>";
+echo $qtd_mat_usadas . "<br>";
+ //  alterar esta coisinha aqui
+while (count($materias_totais) /*<*/ < $qtd_mat_usadas) {
+    echo $diasemana_numero . "<br>" . $dia_semana_atual . "<br>";
+    echo $horas_dia[$dia_semana_atual] . "<br>" . $horas_por_materia . "<br>" . $qtd_mat_usadas . "<br><br>";
+
+    if ($horas_dia[$dia_semana_atual] < $horas_por_materia){
+        
+        $dias_mes_totais[] = (int)($horas_dia[$dia_semana_atual] / $horas_por_materia);
+        $qtd_mat_usadas = $qtd_mat_usadas + $dias_mes_totais[ count($dias_mes_totais) - 1 ];
+
+    } elseif ($horas_dia[$dia_semana_atual] = 0){
+        $dias_mes_totais[] = 0;
+        $qtd_mat_usadas = $qtd_mat_usadas + $dias_mes_totais[ count($dias_mes_totais) - 1 ];
+
+    } else {
+        $dias_mes_totais[] = 1; //não sei pq tá caindo todos aqui
+        $qtd_mat_usadas = $qtd_mat_usadas +$dias_mes_totais[ count($dias_mes_totais) - 1 ];
+
     }
+    $diasemana_numero = $diasemana_numero + 1;
+    if ($diasemana_numero == 7){
+        $diasemana_numero = 0;
+    }
+    echo $qtd_mat_usadas;
+    $dia_semana_atual = $diasemana[$diasemana_numero];
+
 }
 
-echo $dia6;
+
+echo $horas_por_materia . "<br>";
+
+var_dump($dias_mes_totais);
+
+
+
 ?>
 
 
