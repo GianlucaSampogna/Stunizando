@@ -121,34 +121,38 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
 
 $dias_mes_totais = array();
 
+var_dump($horas_dia);
+echo "<br>" . "qtd de materias: " . count($materias_totais) . "<br>";
+echo "qtd de materias usadas: " . $qtd_mat_usadas . "<br>" . "hora por materia: " . $horas_por_materia . "<br>";
 
-echo count($materias_totais) . "<br>";
-echo $qtd_mat_usadas . "<br>";
+
+
  //  alterar esta coisinha aqui
-while (count($materias_totais) /*<*/ < $qtd_mat_usadas) {
-    echo $diasemana_numero . "<br>" . $dia_semana_atual . "<br>";
-    echo $horas_dia[$dia_semana_atual] . "<br>" . $horas_por_materia . "<br>" . $qtd_mat_usadas . "<br><br>";
+while (count($materias_totais) > $qtd_mat_usadas) {
+    echo "dia da semana numero: " . $diasemana_numero . "<br>" . "dia da semana atual: " . $dia_semana_atual . "<br>";
+    echo "horas que irao ser estudada no dia: " . $horas_dia[$dia_semana_atual] . "<br>"  . "<br>" . $qtd_mat_usadas . "<br><br>";
 
-    if ($horas_dia[$dia_semana_atual] < $horas_por_materia){
-        
-        $dias_mes_totais[] = (int)($horas_dia[$dia_semana_atual] / $horas_por_materia);
-        $qtd_mat_usadas = $qtd_mat_usadas + $dias_mes_totais[ count($dias_mes_totais) - 1 ];
+    $hora_conteudo= 
+    $qtd_dias_materia = $horas_dia[$dia_semana_atual]
 
-    } elseif ($horas_dia[$dia_semana_atual] = 0){
+    if ($horas_dia[$dia_semana_atual] == 0){
         $dias_mes_totais[] = 0;
-        $qtd_mat_usadas = $qtd_mat_usadas + $dias_mes_totais[ count($dias_mes_totais) - 1 ];
-
-    } else {
-        $dias_mes_totais[] = 1; //não sei pq tá caindo todos aqui
-        $qtd_mat_usadas = $qtd_mat_usadas +$dias_mes_totais[ count($dias_mes_totais) - 1 ];
-
+    }elseif ($horas_dia[$dia_semana_atual] > $horas_por_materia){
+        $mat_dia = (int)($horas_dia[$dia_semana_atual] / $horas_por_materia);
+        $dias_mes_totais[] = $mat_dia;
+        $qtd_mat_usadas = $qtd_mat_usadas + $mat_dia;
+    }else {
+        $mat_dia = (int)($horas_por_materia / $horas_dia[$dia_semana_atual]);
+        $dias_mes_totais[] = $mat_dia; //não sei pq tá caindo todos aqui
+        $qtd_mat_usadas = $qtd_mat_usadas + 1;
     }
+    
     $diasemana_numero = $diasemana_numero + 1;
     if ($diasemana_numero == 7){
         $diasemana_numero = 0;
     }
-    echo $qtd_mat_usadas;
     $dia_semana_atual = $diasemana[$diasemana_numero];
+    
 
 }
 
@@ -156,6 +160,7 @@ while (count($materias_totais) /*<*/ < $qtd_mat_usadas) {
 echo $horas_por_materia . "<br>";
 
 var_dump($dias_mes_totais);
+echo $n_dias;
 
 
 
