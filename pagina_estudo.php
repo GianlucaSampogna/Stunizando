@@ -63,105 +63,95 @@ $materias_totais = pg_fetch_all($result);
 
 //$horas_dia RECEBE COMO CHAVE O DIA DA SEMANA E RETORNA A QUANTIDADE DE HORAS DO DIA
 //$linha -AQUI TEM O DIA DA SEMANA E A QTD DE HORAS
-$n_dias = (int) $diff->format("%a");
+$n_dias = (int) $diff->format("%a") + 1;
+echo "Numero de dias: " . $n_dias . "<br>";
 $diasemana = array('Domingo', 'Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado');
 $diasemana_numero = date('w', strtotime($dt_inicio));
 $dia_semana_atual = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA EM QUE A PESSOA COMEÇOU A ESTUDAR
 $diasemana_numero = date('w', strtotime($dt_final));
 $dia_semana_final = $diasemana[$diasemana_numero]; //AQUI RETORNA O DIA DA SEMANA FINAL
-$horas_totais = (int)(($n_dias / 7) * $hrs_semana); // AQUI RETORNA A QUANTIDADE DE HORAS TOTAIS QUE ESSA PESSOA IRÁ ESTUDAR
+$horas_totais = ($n_dias / 7) * $hrs_semana; // AQUI RETORNA A QUANTIDADE DE HORAS TOTAIS QUE ESSA PESSOA IRÁ ESTUDAR
+echo "Numero de horas totais " . $horas_totais . "<br><br>";
 $qtd_materias_pessoa = count($materias_totais); //AQUI RETORNA A QUANTIDADE DE MATÉRIAS QUE O USUÁRIO IRÁ ESTUDAR
+echo "Numero de matérias " . $qtd_materias_pessoa . "<br><br>";
 $horas_por_materia =  $horas_totais / $qtd_materias_pessoa; //AQUI RETORNA A MÉDIA DE QUANTO A PESSOA IRÁ ESTUDAR POR MATÉRIA POR DIA
 $materias_totais; //ARRAY DE ARRAY CONTENDOTODAS AS MATÉRIAS QUE A PESSOA IRÁ ESTUDAR (CONTENDO O nome, id e fk_disciplinas_id)
 
 
 $cont_hrs = 0;
-$i = 1;
+$i = 0;
 $materia_atual = 0;
 $horas_dia_seguinte = 0;
 $dia = strtotime($dt_inicio);
-
-// while($i < $n_dias){
-//     $num_hrs_dia = $horas_dia[$dia_semana_atual] - $horas_dia_seguinte;
-//     $qt_materias = (int)($num_hrs_dia/$horas_por_materia) + 1;
-//     $horas_dia_seguinte = ($qt_materias*$horas_por_materia - $num_hrs_dia);
-//     $j =0;
-//     //IPRIMIRA OS VALORES PARA VER SE TA CÉRTO AS CONTAS
-//     echo $qt_materias;
-//     echo "<br><br>";
-//     //echo (date('w', $dia));
-//     while ($j<$qt_materias){
-//         $nome_materia = $materias_totais[$materia_atual]['nome'];
-//         echo $nome_materia;
-//         //GERAR ENTRADA NO CALENDÁRIO AQUI(nome da matéria + dia)
-//         $j = $j+1;
-//         $materia_atual = $materia_atual +1;
-
-//     }
-//     echo "<br>";
-//     $dia = $dia + 86400;
-//     $i = $i+1;
-// }
-
-// while ($i < $d_dias){
-
-//     $dia . $i = if ($)
-// }
-
-
-//AQUI TO TENTANDO CAUCULAR A QTD DE MATÉRIAS QUE IRÁ SER ESTUDADA NO DIA, OS DIAS QUE SOBRAREM, IREI COLOCAR COMO REVISÃO
-
-
-$qtd_mat_usadas = 0;
-
+$eventos = array();
+$eventos["calendarEvents"] = array();
+$id_evento = 0;
+$dia_da_atividade = $dia_semana_atual;
 $diasemana_numero = date('w', strtotime($dt_inicio));
 
 
-// $dia = "dia";
-
-$dias_mes_totais = array();
-
-var_dump($horas_dia);
-echo "<br>" . "qtd de materias: " . count($materias_totais) . "<br>";
-echo "qtd de materias usadas: " . $qtd_mat_usadas . "<br>" . "hora por materia: " . $horas_por_materia . "<br>";
 
 
 
- //  alterar esta coisinha aqui
-while (count($materias_totais) > $qtd_mat_usadas) {
-    echo "dia da semana numero: " . $diasemana_numero . "<br>" . "dia da semana atual: " . $dia_semana_atual . "<br>";
-    echo "horas que irao ser estudada no dia: " . $horas_dia[$dia_semana_atual] . "<br>"  . "<br>" . $qtd_mat_usadas . "<br><br>";
+// var_dump($horas_dia);
+// echo "Horas por matéria: " . $horas_por_materia . "<br>";
 
-    $hora_conteudo= 
-    $qtd_dias_materia = $horas_dia[$dia_semana_atual]
+ while($i < $n_dias){
+     $num_hrs_dia = $horas_dia[$dia_semana_atual] - $horas_dia_seguinte;
+     echo "<br><br>".  "Numero de hora do dia da semana em que está: " . $horas_dia[$dia_semana_atual] . "<br>" ."Numero de horas do dia(contando o desconto do dia passado): " . $num_hrs_dia . "<br>" ;
 
-    if ($horas_dia[$dia_semana_atual] == 0){
-        $dias_mes_totais[] = 0;
-    }elseif ($horas_dia[$dia_semana_atual] > $horas_por_materia){
-        $mat_dia = (int)($horas_dia[$dia_semana_atual] / $horas_por_materia);
-        $dias_mes_totais[] = $mat_dia;
-        $qtd_mat_usadas = $qtd_mat_usadas + $mat_dia;
-    }else {
-        $mat_dia = (int)($horas_por_materia / $horas_dia[$dia_semana_atual]);
-        $dias_mes_totais[] = $mat_dia; //não sei pq tá caindo todos aqui
-        $qtd_mat_usadas = $qtd_mat_usadas + 1;
+     if ($horas_dia[$dia_semana_atual] == 0){
+        
+        
+    }else{
+        $qtd_materias = $num_hrs_dia/$horas_por_materia;
+        $qtd_materias_int = (int)($num_hrs_dia/$horas_por_materia);
+        if ($qtd_materias > $qtd_materias_int){
+           $qt_materias = (int)($num_hrs_dia/$horas_por_materia) + 1;
+        }else{
+           $qt_materias = (int)($qt_materias);
+        }
+   
+        echo "Quantidade de matérias do dia " . $qt_materias ;
+        $horas_dia_seguinte = ($qt_materias*$horas_por_materia - $num_hrs_dia);
+        $j =0;
+        $horas_estudada_no_dia = 0;
+        
+        $nome_materias_dia = "";
+        while ($j < $qt_materias AND $qt_materias > 0){ //TENHO Q ARRANGAR UMA MANEIRA DE PASSAR A HORA DO DIA QUANDO FOR 0 PARA O PROXIMO DIA e TRATAR CASOS QUE O SALDO DE HORAS É NEGATIVO
+            $nome_materia = $materias_totais[$materia_atual]['nome'];
+            echo "<br>" . $nome_materia ;
+            $horas_estudada_no_dia = $horas_estudada_no_dia + $horas_por_materia;
+            $j = $j+1;
+
+            $nome_materias_dia = $nome_materias_dia . ", " . $nome_materia;
+
+
+            if($horas_estudada_no_dia < $num_hrs_dia){
+                $materia_atual = $materia_atual +1;
+            }
+
+            $materia = array();
+            $materia["id"] = $id_evento;
+            $materia["name"] = "DIA DE ESTUDO";
+            $materia["date"] = $dia_da_atividade;
+            $materia["type"] = "event";
+            $materia["description"] = $nome_materias_dia;
+            array_push($eventos["calendarEvents"], $materia);
+           
+        }
+
     }
-    
-    $diasemana_numero = $diasemana_numero + 1;
-    if ($diasemana_numero == 7){
-        $diasemana_numero = 0;
-    }
-    $dia_semana_atual = $diasemana[$diasemana_numero];
-    
 
-}
-
-
-echo $horas_por_materia . "<br>";
-
-var_dump($dias_mes_totais);
-echo $n_dias;
-
+     echo "<br>";
+     $i = $i+1;
+     $diasemana_numero = $diasemana_numero + 1;
+     if ($diasemana_numero == 7){
+         $diasemana_numero = 0;
+     }
+     $dia_semana_atual = $diasemana[$diasemana_numero];
+     $dia_da_atividade = $dia_da_atividade + 86400;
+ }
 
 
 ?>
