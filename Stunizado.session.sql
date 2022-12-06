@@ -1,1 +1,0 @@
-SELECT * FROM plan_disc WHERE fazer =1 AND id_planejamento = 23
