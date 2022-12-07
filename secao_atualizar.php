@@ -1,13 +1,22 @@
-<?php
+<?php 
+
+include_once('conexao.php');
+include_once('db_crud.php');
+include_once('tabelas.php');
 include_once 'head.php';
 include_once 'header_cadastrado.php';
 include_once 'protect.php';
 
-$id = $_SESSION['id'];
-$sql = "SELECT * FROM usuario WHERE id = $id";
-$result = pg_query($conexao, $sql);
-$dados = pg_fetch_array($result);
 
+
+$id = $_SESSION['id'];
+$perfil = new Usuario();
+    $dados = $perfil->find($id);
+
+
+if ($dados['nome'] == "") {
+    $dados['nome'] = 'Pagina';
+}
 
 
 ?>
@@ -15,7 +24,7 @@ $dados = pg_fetch_array($result);
 <div class="row">
     <div class="col s12 m6 ">
         <h3 class="light"> Editar Cliente </h3>
-        <form action="crud-editar.php" method="POST">
+        <form action="crud_editar.php" method="POST">
             <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
             <div class="input-field col s12">
                 <input type="text" name="nome" id="nome" value="<?php echo $dados['nome']; ?>">
@@ -63,7 +72,7 @@ $dados = pg_fetch_array($result);
 					</div>
 					<div class="modal-footer">
 					  
-					  <form action="crud_deletar.php" method="POST">
+					  <form action="crud_delete.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $dados['id'];?>">
 						<button type="submit" name="btn-deletar" class="btn red">Sim, quero deletar</button>
 						<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
@@ -90,6 +99,7 @@ $dados = pg_fetch_array($result);
             </script>
             
             <?include_once 'final.php';?>
+
 
 
 

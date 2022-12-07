@@ -19,12 +19,6 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         />
-        <link href="js/fullcalendar/lib/main.css" rel="stylesheet" />
-        <script src="js/fullcalendar/lib/main.js"></script>
-        
-        <!-- CSS calendário -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
-
     
 
         <!-- Estilo customizado -->

@@ -1,4 +1,5 @@
 <?php
+include_once 'conexao.php'
 include_once 'protect.php';
 include_once 'header_cadastrado.php';
 

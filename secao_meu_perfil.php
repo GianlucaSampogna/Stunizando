@@ -1,14 +1,21 @@
 <?php 
+include_once('conexao.php');
+include_once('db_crud.php');
+include_once('tabelas.php');
 include_once 'head.php';
-include_once 'header_cadastrado.php'; ///Incluição do header 
+include_once 'header_cadastrado.php'; ///Inclusão do header 
+
 
 session_start();
 $id = $_SESSION['id'];
-    $sql = "SELECT * FROM usuario WHERE id = $id";
-    $result = pg_query($conexao, $sql);
-    $dados = pg_fetch_array($result); 
+
+    $perfil = new Usuario();
+    $dados = $perfil->find($id);
 
 
+    if($dados['nome'] == ""){
+    $dados['nome'] = 'Pagina';
+    }
 
     
 ?>
