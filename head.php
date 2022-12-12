@@ -22,6 +22,9 @@
         />
         <link href="js/fullcalendar/lib/main.css" rel="stylesheet" />
 
+        <link rel="stylesheet" type="text/css" href="css/evo-calendar.css"/>
+        <link rel="stylesheet" type="text/css" href="css/evo-calendar.midnight-blue.css"/>
+
         
         <!-- CSS calendário -->
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>

@@ -17,20 +17,35 @@
 <script src="js/fullcalendar/lib/main.js"></script>
 
 
+
+
 <script>
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         const eventos = document.querySelector("#evento");
+        console.log(alunos);
 
         let alunos = JSON.parse(eventos.value);
         console.log(alunos);
         let calendarEvents = [];
 
-        for(let aluno of alunos){
-            let { id_evento, name, dia_da_atividade, type, description} = aluno;
-            
-            
-            console.log({ id_evento, name, dia_da_atividade, type, description});
+        for (let aluno of alunos) {
+            let {
+                id_evento,
+                name,
+                dia_da_atividade,
+                type,
+                description
+            } = aluno;
+
+
+            console.log({
+                id_evento,
+                name,
+                dia_da_atividade,
+                type,
+                description
+            });
 
 
             let evento = {
@@ -43,16 +58,32 @@
             }
 
             calendarEvents.push(evento);
-            
-            
-        }    
-      
-    })
 
-</script>
 
-<script>
-$('#calendar').evoCalendar()
+
+        }
+
+        // inicializando calendário
+        $('#calendar').evoCalendar({
+            'language': 'pt',
+            'format': "yyyy-mm-dd",
+            'todayHighlight': true,
+            'sidebarDisplayDefault': false,
+            'calendarEvents': calendarEvents
+        })
+        
+        // $("#calendar").evoCalendar('addCalendarEvent', [
+        //     {
+        //     id: '09nk7Ts',
+        //     name: "My Birthday",
+        //     date: "February/15/2020",
+        //     type: "birthday",
+        //     everyYear: true
+        //     }
+        // ]);
+    });
+        
+
 </script>
 
 </body>

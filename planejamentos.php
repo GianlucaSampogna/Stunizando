@@ -24,7 +24,8 @@ include_once 'conexao.php';
                     <form action="pagina_estudo.php" method="post">
                     <h5 class="card-title"><?php echo $linha["nome"] ?></h5>
                     <p class="card-text">ESSE É O SEU <?php echo $num ?> PLANEJAMENTO</p>
-                    <a href="pagina_estudo.php" class="btn btn-primary"><input type="submit" value="Acessar"></a>
+                    <form action="pagina_estudo.php" method="post">
+                        <button class="botao_planejamento" type="submit" name="id" value="<?php echo $linha["id"]?>">ACESSAR</button>
                     </form>
 
                 </div>

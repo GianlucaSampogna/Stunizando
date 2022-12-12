@@ -83,7 +83,7 @@ $i = 0;
 $materia_atual = 0;
 $horas_dia_seguinte = 0;
 $dia = strtotime($dt_inicio);
-$eventos = array();
+//$eventos = array();
 $eventos["calendarEvents"] = array();
 $id_evento = 0;
 $dia_da_atividade = date('Y-m-d', strtotime($dt_inicio));
@@ -124,7 +124,8 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
             $horas_estudada_no_dia = $horas_estudada_no_dia + $horas_por_materia;
             $j = $j+1;
 
-            $nome_materias_dia = $nome_materias_dia . ", " . $nome_materia;
+            $nome_materias_dia = $nome_materias_dia . "/" . $nome_materia;
+
 
 
             if($horas_estudada_no_dia < $num_hrs_dia){
@@ -133,15 +134,16 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
 
             $materia = array();
             $materia["id"] = $id_evento;
-            $materia["name"] = "DIA DE ESTUDO";
+            //$materia["name"] = "DIA DE ESTUDO";
             $materia["date"] = $dia_da_atividade;
-            $materia["type"] = "event";
+            //$materia["type"] = "event";
             $materia["description"] = $nome_materias_dia;
             array_push($eventos["calendarEvents"], $materia);
             $id_evento = $id_evento +1;
             $dia_da_atividade = date('Y-m-d', strtotime("+1 days",strtotime($dia_da_atividade)));
            
         }
+        //var_dump($nome_materias_dia);
 
     }
 
@@ -153,16 +155,23 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
      }
      $dia_semana_atual = $diasemana[$diasemana_numero];
  }
+
+ 
+  
+ //echo "<pre>"; print_r($eventos); echo "</pre>";
  $eventos = json_encode($eventos);
- echo "<pre>"; print_r($eventos); echo "</pre>";
+  //echo "<pre>"; print_r($eventos); echo "</pre>";
 
  
 
 ?>
 
-<input type="hidden" id="evento" value="<?php echo $eventos; ?>">
+<input type="hidden" id="evento" value="<?php echo urlencode($eventos); ?>">
 
 <div id="calendar" name="calendar"></div>
+
+        <link rel="stylesheet" type="text/css" href="css/evo-calendar.css"/>
+        <link rel="stylesheet" type="text/css" href="css/evo-calendar.midnight-blue.css"/>
 
 <?php
 include_once 'final.php';
