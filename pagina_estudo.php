@@ -86,7 +86,7 @@ $dia = strtotime($dt_inicio);
 $eventos = array();
 $eventos["calendarEvents"] = array();
 $id_evento = 0;
-$dia_da_atividade = $dia_semana_atual;
+$dia_da_atividade = date('Y-m-d', strtotime($dt_inicio));
 $diasemana_numero = date('w', strtotime($dt_inicio));
 
 
@@ -138,6 +138,8 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
             $materia["type"] = "event";
             $materia["description"] = $nome_materias_dia;
             array_push($eventos["calendarEvents"], $materia);
+            $id_evento = $id_evento +1;
+            $dia_da_atividade = date('Y-m-d', strtotime("+1 days",strtotime($dia_da_atividade)));
            
         }
 
@@ -150,15 +152,17 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
          $diasemana_numero = 0;
      }
      $dia_semana_atual = $diasemana[$diasemana_numero];
-    //  $dia_da_atividade = $dia_da_atividade + 86400;
  }
+ $eventos = json_encode($eventos);
+ echo "<pre>"; print_r($eventos); echo "</pre>";
 
+ 
 
 ?>
 
+<input type="hidden" id="evento" value="<?php echo $eventos; ?>">
 
-<div id="calendar"></div>
-
+<div id="calendar" name="calendar"></div>
 
 <?php
 include_once 'final.php';
