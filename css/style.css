@@ -13,8 +13,8 @@
 
 body {
 	line-height: 1;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #F2F2F2;
+    font-family: Poppins;
+    background-color: #ffffff;
     height:100vh;
     display: flex;
     flex-direction: column;
@@ -35,6 +35,7 @@ header {
 .footer{
     background-color: #800080;
 }
+
 
 a #img {
 	width: 100px;
@@ -89,7 +90,7 @@ table {
 
 .card-title{
     text-align:center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Poppins;
     font-weight: bolder;
 }
 
@@ -111,11 +112,11 @@ table {
     text-align: center;
     margin-bottom: 1rem;
     font-size: small;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: Poppins;
 }
 
 .card-text{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Poppins;
     font-size: medium;
     line-height: 150%;
     
@@ -169,7 +170,7 @@ table {
 .Texto_embaixo_carroceu{
     text-align: center;
     font-size: larger;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Poppins;
     font-weight: bolder;
     margin-top: 5% ;
 }
@@ -177,6 +178,7 @@ table {
 /*Estilos do menu*/
 .mt-4{
     text-align: justify;
+    font-size: 20px;
   }
   
   .imagem1{
@@ -197,6 +199,7 @@ table {
   
   .row mb-5{
     margin-top: 10%;
+    
   }
   
   .card-text{
@@ -464,4 +467,142 @@ a#a:hover{
 
 .card-body{
     padding-bottom: 20px;
+}
+
+
+/*Estilos de contato*/
+
+/*Margens do section*/
+.contato{
+    padding: 20px  100px 100px 200px;
+}
+
+/*Estilos do container de contato*/
+.container-cont{
+  width: 85%;
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px 60px 30px 40px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*Estilos do conteúdo no container*/
+.container-cont .content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-cont .content .left-side{
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  position: relative;
+}
+
+.content .left-side::before{
+  content: '';
+  position: absolute;
+  height: 70%;
+  width: 2px;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #98857E;
+}
+
+.content .left-side .details{
+  margin: 14px;
+  text-align: center;
+}
+
+.content .left-side .details i{
+  font-size: 30px;
+  color: rgb(255, 246, 72);
+  margin-bottom: 10px;
+}
+
+.content .left-side .details .topic{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.content .left-side .details .text-one,
+.content .left-side .details .text-two{
+  font-size: 14px;
+  color: #afafb6;
+}
+
+.container-cont .content .right-side{
+  width: 75%;
+  margin-left: 75px;
+}
+
+.content .right-side .topic-text{
+  font-size: 23px;
+  font-weight: 600;
+  color: rgb(255, 246, 72);
+}
+
+.right-side .input-box{
+  height: 50px;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.right-side .input-box input,
+.right-side .input-box textarea{
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #F0F1F8;
+  border-radius: 6px;
+  padding: 0 15px;
+  resize: none;
+}
+
+.right-side .message-box{
+  min-height: 110px;
+}
+
+.right-side .input-box textarea{
+  padding-top: 6px;
+}
+
+/*Estilos do botão*/
+.right-side .button{
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.right-side .button input[type="button"]{
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: rgb(255, 246, 72);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button input[type="button"]:hover{
+  background: #C1AC9C;
+}
+
+.tcontato{
+    margin-top: 20px;
+    margin-left: 30%;
+}
+
+.stcontato{
+    margin-top: 20px;
+    margin-left: 33%;
 }
