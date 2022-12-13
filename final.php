@@ -23,37 +23,33 @@
 
     $(document).ready(function() {
         const eventos = document.querySelector("#evento");
-        console.log(alunos);
+        console.log(eventos);
 
-        let alunos = JSON.parse(eventos.value);
+        let alunos = JSON.parse(decodeURIComponent(eventos.value));
         console.log(alunos);
         let calendarEvents = [];
 
-        for (let aluno of alunos) {
+        for (let aluno of alunos['calendarEvents']) {
             let {
-                id_evento,
-                name,
-                dia_da_atividade,
-                type,
+                id,
+                date,
                 description
             } = aluno;
 
 
             console.log({
-                id_evento,
-                name,
-                dia_da_atividade,
-                type,
+                id,
+                date,
                 description
             });
 
 
             let evento = {
-                "id": id_evento,
-                "name": name,
-                "type": type,
-                "description": description,
-                "date": dia_da_atividade,
+                "id": id,
+                "name": "DIA DE ESTUDO",
+                "type": "event",
+                "description": description.replace(/\+/g,' '),
+                "date": date,
                 "color": "#a518ba"
             }
 

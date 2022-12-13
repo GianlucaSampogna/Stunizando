@@ -124,7 +124,7 @@ $diasemana_numero = date('w', strtotime($dt_inicio));
             $horas_estudada_no_dia = $horas_estudada_no_dia + $horas_por_materia;
             $j = $j+1;
 
-            $nome_materias_dia = $nome_materias_dia . "/" . $nome_materia;
+            $nome_materias_dia = $nome_materias_dia . "<br><br>" . $nome_materia;
 
 
 
